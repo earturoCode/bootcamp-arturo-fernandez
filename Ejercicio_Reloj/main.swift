@@ -1,4 +1,5 @@
 import Foundation
+//CLASE DE RELOJ
 class reloj {
     private var horas:Int       //0-23
     private var minutos:Int     //0-59
