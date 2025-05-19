@@ -27,9 +27,4 @@
 📧 [earturoCode@github](mailto:earturoCode@github)  
 💼 GitHub: [@earturoCode](https://github.com/earturoCode)
 
----
-
-## 📜 Licencia
-
-Este proyecto está bajo la licencia MIT. Puedes ver más detalles en el archivo [LICENSE](LICENSE).
 
