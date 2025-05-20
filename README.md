@@ -10,7 +10,7 @@
 | `Ejercicio_Vaca_Toro`   | Juego de "Vacas y Toros" resuelto en Python.                               |
 | `ejercicio3`            | Tercer ejercicio práctico en Swift.                                        |
 | `Ejercicios-1-2`        | Primeros ejercicios individuales realizados por Arturo Fernández en Swift. |
-| `GENEALA_5`             | Ejercitario de dados, Generala, Poker, Full                                |
+| `GENERALA_5/GENERALA_5`             | Ejercitario de dados, Generala, Poker, Full                                |
 
 ---
 
