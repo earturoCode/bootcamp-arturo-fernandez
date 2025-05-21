@@ -205,17 +205,21 @@ func valorJugada(_ jugada: String) -> Int {
     }
 }
 
-//Función para obtener la carta más alta de una mano
-func cartaMasAlta(_ cartas: [Carta]) -> Int {
-    var maximo = 0
+// Función para el desempate
+func compararCartasAltas(_ cartas1: [Carta], _ cartas2: [Carta]) -> Int {
+    let valores1 = cartas1.map { $0.valoresCartas() }.sorted(by: >)
+    let valores2 = cartas2.map { $0.valoresCartas() }.sorted(by: >)
 
-    for carta in cartas {
-        let valor = carta.valoresCartas()
-        if valor > maximo {
-            maximo = valor
+    // Comparar carta por carta
+    for i in 0..<min(valores1.count, valores2.count) {
+        if valores1[i] > valores2[i] {
+            return 1
+        } else if valores2[i] > valores1[i] {
+            return 2
         }
     }
-    return maximo
+
+    return 0  // Empate verdadero (todas las cartas iguales)
 }
 
 // Función para mostrar el valor como texto
@@ -253,25 +257,33 @@ func quienGana(_ jugador1: Jugador, _ jugador2: Jugador) -> String {
     } else if valor2 > valor1 {
         return "\(jugador2.nombre) gana con \(jugada2)"
     } else {
+        // Si tienen la misma jugada, comparar todas las cartas en orden
+        let resultado = compararCartasAltas(jugador1.cartas, jugador2.cartas)
 
-        //Si tienen la misma jugada, desempatar por carta más alta
-        let alta1 = cartaMasAlta(jugador1.cartas)
-        let alta2 = cartaMasAlta(jugador2.cartas)
+        if resultado == 1 {
 
-        if alta1 > alta2 {
+            let valoresOrdenados = jugador1.cartas.map { $0.valoresCartas() }
+                .sorted(by: >)
+            let cartasTexto = valoresOrdenados.map { mostrarValor($0) }.joined(
+                separator: ", "
+            )
             return
-                "\(jugador1.nombre) gana con \(jugada1) (carta más alta: \(mostrarValor(alta1)))"
-        } else if alta2 > alta1 {
+                "\(jugador1.nombre) gana con \(jugada1) (cartas altas: \(cartasTexto))"
+        } else if resultado == 2 {
+            let valoresOrdenados = jugador2.cartas.map { $0.valoresCartas() }
+                .sorted(by: >)
+            let cartasTexto = valoresOrdenados.map { mostrarValor($0) }.joined(
+                separator: ", "
+            )
             return
-                "\(jugador2.nombre) gana con \(jugada2) (carta más alta: \(mostrarValor(alta2)))"
+                "\(jugador2.nombre) gana con \(jugada2) (cartas altas: \(cartasTexto))"
         } else {
             return
-                "¡Empate! Ambos tienen \(jugada1) con \(mostrarValor(alta1)) como carta más alta"
+                "¡Empate perfecto! Ambos tienen exactamente las mismas cartas."
         }
     }
 }
 
-// Función principal del juego
 func jugarPoker() {
 
     // Crear y preparar el mazo
@@ -280,7 +292,7 @@ func jugarPoker() {
 
     // Mezclar las cartas
     mazo.mezclar()
-    print("Mazo mezclado")
+    print("Mezclando mazo...")
 
     // Crear jugadores
     var jugador1 = Jugador(nombre: "Pepito")
@@ -304,8 +316,10 @@ func jugarPoker() {
     print("\(jugador2.nombre) tiene: \(jugador2.tipoJugada!)")
 
     // Determinar el ganador
-    print("\n____RESULTADO____")
+    print("\n_________RESULTADO_________")
     print(quienGana(jugador1, jugador2))
+    print("___________________________")
+
 }
 
 jugarPoker()
