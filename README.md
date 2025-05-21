@@ -11,7 +11,7 @@
 | `ejercicio3`            | Tercer ejercicio práctico en Swift.                                        |
 | `Ejercicios-1-2`        | Primeros ejercicios individuales realizados por Arturo Fernández en Swift. |
 | `GENERALA_5/GENERALA_5`             | Ejercitario de dados, Generala, Poker, Full                                |
-| `Poker2Personas`             | Ejercitario de Poker, ya con 2 personas                                |
+| `Poker2Personas`             | Ejercitario de Poker, ya con 2 jugadores                                |
 
 ---
 
